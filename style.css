@@ -904,3 +904,59 @@ nav ul{
 
 }
 }
+
+* ================= LANGUAGE SWITCH ================= */
+
+.language-switch{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-left:10px;
+
+}
+
+.language-btn{
+
+    border:none;
+
+    background:transparent;
+
+    color:#0D4D9E;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    padding:4px;
+
+    transition:.3s;
+
+}
+
+.language-btn:hover{
+
+    color:#1565c0;
+
+}
+
+.language-btn.active{
+
+    font-weight:800;
+
+    text-decoration:underline;
+
+}
+
+.language-switch span{
+
+    color:#999;
+
+}
