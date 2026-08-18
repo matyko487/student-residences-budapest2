@@ -11,39 +11,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
         elements.forEach(function (element) {
 
-            element.textContent = element.getAttribute("data-" + language);
+            const translation = element.getAttribute("data-" + language);
+
+            if (translation !== null) {
+                element.textContent = translation;
+            }
 
         });
 
-        if (language === "en") {
-
-            englishButton.classList.add("active");
-            hungarianButton.classList.remove("active");
-
-            document.documentElement.lang = "en";
-
-        } else {
-
-            hungarianButton.classList.add("active");
-            englishButton.classList.remove("active");
-
-            document.documentElement.lang = "hu";
-
+        if (englishButton) {
+            englishButton.classList.toggle("active", language === "en");
         }
 
-        localStorage.setItem("language", language);
+        if (hungarianButton) {
+            hungarianButton.classList.toggle("active", language === "hu");
+        }
+
+        document.documentElement.lang = language;
+
+        try {
+            localStorage.setItem("language", language);
+        } catch (error) {
+            // Continue normally if localStorage is unavailable.
+        }
     }
 
-    englishButton.addEventListener("click", function () {
-        setLanguage("en");
-    });
+    if (englishButton) {
+        englishButton.addEventListener("click", function () {
+            setLanguage("en");
+        });
+    }
 
-    hungarianButton.addEventListener("click", function () {
-        setLanguage("hu");
-    });
+    if (hungarianButton) {
+        hungarianButton.addEventListener("click", function () {
+            setLanguage("hu");
+        });
+    }
 
-    const savedLanguage = localStorage.getItem("language") || "en";
+    let savedLanguage = "en";
 
-    setLanguage(savedLanguage);
+    try {
+        savedLanguage = localStorage.getItem("language") || "en";
+    } catch (error) {
+        savedLanguage = "en";
+    }
+
+    setLanguage(savedLanguage === "hu" ? "hu" : "en");
 
 });
